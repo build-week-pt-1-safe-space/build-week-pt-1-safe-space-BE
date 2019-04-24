@@ -14,5 +14,4 @@ describe('Users Model', () => {
             expect(Array.isArray(users)).toBe(true);
         });
     });
-
 });

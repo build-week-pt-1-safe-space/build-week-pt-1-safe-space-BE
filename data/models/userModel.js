@@ -1,7 +1,7 @@
 const db = require('../dbConfig');
 
 const getAllUsers = async () => {
-    return null;
+    return db('users');
 }
 
 const getUserBy = async (filter) => {
