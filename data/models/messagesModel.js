@@ -9,7 +9,9 @@ const getUserMes = async id => {
 }
 
 const addMes = async message => {
-    return null
+    const [ id ] = await db('messages').insert(message);
+    
+    return await db('messages').where({ id }); 
 }
 
 const editMes = async (id, update) => {

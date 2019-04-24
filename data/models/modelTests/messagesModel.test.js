@@ -72,5 +72,12 @@ describe('MESSAGES MODEL', () => {
             expect(messages.length).toBe(1);
             expect(messages[0].body).toBe('Dont worry, Be Happy');
         });
+
+        it('should return the added message', async () => {
+            const user = await Messages.addMes(test_messages[0]);
+
+            expect(user[0].id).toBe(1);
+            expect(user[0].created_at).toBe('4pm');
+        });
     });
 });
