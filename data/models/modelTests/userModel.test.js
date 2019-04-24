@@ -105,6 +105,19 @@ describe('USERS MODEL', () => {
         });
     });
 
+    describe('editUser()', () => {
+        
+        it('should return the user', async () => {
+            await db('users').insert(test_users);
+
+            const edit = { first_name: 'New' }
+
+            const user = await Users.editUser(1, edit);
+
+            expect(user[0].id).toBe(1);
+        });
+    });
+
     describe('deleteUser()', () => {
 
         it('should remove user from the database by id', async () => {
