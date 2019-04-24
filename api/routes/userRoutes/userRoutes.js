@@ -29,4 +29,21 @@ router.get('/:id', (req, res) => {
     }
 });
 
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const edit = req.body;
+   
+    if(isNaN(Number(id))) {
+        res.status(400).json({ message: 'No ID Found' });
+    } else {
+        Users.editUser(id, edit)
+        .then(user => {
+            res.status(200).json(user);
+        })
+        .catch(err => {
+            res.status(500).json(err);
+        });
+    }
+});
+
 module.exports = router;

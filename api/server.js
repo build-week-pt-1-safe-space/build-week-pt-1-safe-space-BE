@@ -14,7 +14,7 @@ const routes = require('./routes');
 //Middleware Use
 server.use(express.json());
 server.use(helmet(), cors());
-server.use(logger('dev'));
+//server.use(logger('dev'));
 
 //Routes Use
 server.use('/api', authRoutes);
