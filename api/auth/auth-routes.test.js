@@ -70,7 +70,7 @@ describe('AUTH ROUTES', () => {
         it('should return status 200 on login', async () => {
             await request(server).post('/api/register')
                                  .send(user);
-                                 
+
             const res = await request(server).post('/api/login')
                                             .send({ 
                                                 email: user.email,
@@ -78,6 +78,32 @@ describe('AUTH ROUTES', () => {
                                             });
 
             expect(res.status).toBe(200);
+        });
+
+        it('should return status 401 if password is not matched', async () => {
+            await request(server).post('/api/register')
+                                 .send(user);
+
+            const res = await request(server).post('/api/login')
+                                            .send({ 
+                                                email: user.email,
+                                                password: 'something else'
+                                            });
+
+            expect(res.status).toBe(401);
+        });
+
+        it('should return status 401 if email does not exists in Database', async () => {
+            await request(server).post('/api/register')
+                                 .send(user);
+
+            const res = await request(server).post('/api/login')
+                                             .send({
+                                                 email: 'something else',
+                                                 password: user.password
+                                             });
+
+            expect(res.status).toBe(401);
         });
     });
 });
