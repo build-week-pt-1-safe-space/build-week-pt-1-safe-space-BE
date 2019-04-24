@@ -15,7 +15,9 @@ const addUser = async (user) => {
 }
 
 const editUser = async (id, edit) => {
-    return null;
+    await db('users').where({ id }).update(edit);
+
+    return await db('users').where({ id });
 }
 
 const deleteUser = async (id) => {

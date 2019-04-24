@@ -113,7 +113,7 @@ describe('USERS MODEL', () => {
             const edit = { first_name: 'New' }
 
             const user = await Users.editUser(1, edit);
-
+            console.log(user)
             expect(user[0].id).toBe(1);
         });
     });
