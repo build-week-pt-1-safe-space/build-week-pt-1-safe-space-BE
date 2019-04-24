@@ -13,7 +13,9 @@ const getUser = async () => {
 }
 
 const addUser = async (user) => {
-    return null;
+    const [ id ] = await db('users').insert(user);
+
+    return await db('users').where({ id });
 }
 
 const editUser = async (id) => {

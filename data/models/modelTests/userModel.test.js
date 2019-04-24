@@ -53,7 +53,7 @@ describe('Users Model', () => {
             const users = await db('users');
 
             expect(users.length).toBe(1);
-            expet(users[0].first_name).toBe('Me');
+            expect(users[0].first_name).toBe('Me');
             expect(users[0].id).toBe(1);
         });
     });
