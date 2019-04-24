@@ -1,7 +1,7 @@
 const db = require('../dbConfig');
 
 const getAllMes = async () => {
-    return null;
+    return await db('messages');
 }
 
 const getUserMes = async id => {

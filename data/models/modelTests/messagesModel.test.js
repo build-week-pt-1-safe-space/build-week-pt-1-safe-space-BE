@@ -30,5 +30,15 @@ describe('MESSAGES MODEL', () => {
             expect(Array.isArray(messages)).toBe(true);
             expect(messages.length).toBe(0);
         });
+
+        it('should return all messages in the database', async () => {
+            await db('messages').insert(test_messages);
+
+            const messages = await Messages.getAllMes();
+
+            expect(messages.length).toBe(2);
+            expect(messages[0].body).toBe('Dont worry, Be Happy');
+            expect(messages[1].user_id).toBe(2);
+        });
     });
 });
