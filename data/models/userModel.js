@@ -6,8 +6,13 @@ const getAllUsers = async () => {
 }
 
 //Return Single User In Database By ID
-const getUserById = async (filter) => {
-    return await db('users').where({ id: filter });
+const getUserById = async (id) => {
+    return await db('users').where({ id });
+}
+
+//Return Single User In Database By Email Address 
+const getUserByEmail = async(email) => {
+    return await db('users').where({ email });
 }
 
 //Return User That Was Stored In Database
@@ -36,6 +41,7 @@ const deleteUser = async (id) => {
 module.exports = {
     getAllUsers,
     getUserById,
+    getUserByEmail,
     addUser,
     editUser,
     deleteUser
