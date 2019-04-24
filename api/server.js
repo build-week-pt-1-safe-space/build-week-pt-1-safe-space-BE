@@ -10,4 +10,8 @@ server.use(express.json());
 server.use(helmet(), cors());
 server.use(logger('dev'));
 
+server.get('/', async (req, res) => {
+    res.status(200).json({ api: 'Up and Running' });
+});
+
 module.exports = server;

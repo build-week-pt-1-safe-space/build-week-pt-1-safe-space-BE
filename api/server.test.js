@@ -13,10 +13,12 @@ describe('SERVER', () => {
     });
 
     describe('GET /', () => {
-        it('should return { api: "Up and Running" }', () => {
-            const res = request(server).get('/');
+        it('should return the JSON object { api: "Up and Running" } with status 200', async () => {
+            const res = await request(server).get('/');
 
             expect(res.body).toEqual({ api: 'Up and Running' });
+            expect(res.status).toBe(200);
+            expect(res.type).toBe('application/json');
         });
     });
 });
