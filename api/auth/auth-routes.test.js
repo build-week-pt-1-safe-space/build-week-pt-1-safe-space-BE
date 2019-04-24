@@ -64,4 +64,20 @@ describe('AUTH ROUTES', () => {
             expect(res.status).toBe(409);
         });
     });
+
+    describe('/login', () => {
+        
+        it('should return status 200 on login', async () => {
+            await request(server).post('/api/register')
+                                 .send(user);
+                                 
+            const res = await request(server).post('/api/login')
+                                            .send({ 
+                                                email: user.email,
+                                                password: user.password
+                                            });
+
+            expect(res.status).toBe(200);
+        });
+    });
 });
