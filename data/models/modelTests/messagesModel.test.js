@@ -61,4 +61,16 @@ describe('MESSAGES MODEL', () => {
             expect(userMessages.length).toBe(0);
         });
     });
+
+    describe('addMes()', () => {
+
+        it('should add a message to the database', async () => {
+            await Messages.addMes(test_messages[0]);
+
+            const messages = await db('messages');
+
+            expect(messages.length).toBe(1);
+            expect(messages[0].body).toBe('Dont worry, Be Happy');
+        });
+    });
 });
