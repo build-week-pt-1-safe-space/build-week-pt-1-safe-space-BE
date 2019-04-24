@@ -27,7 +27,7 @@ const test_users = [
     }
 ];
 
-describe('Users Model', () => {
+describe('USERS MODEL', () => {
 
     describe('getAllUsers()', () => {
 
@@ -42,6 +42,18 @@ describe('Users Model', () => {
 
             expect(users).toEqual([]);
             expect(users.length).toBe(0);
+        });
+
+        it('should return all users found in database', async () => {
+            await db('users').insert(test_users);
+
+            const users = await Users.getAllUsers();
+
+            expect(users.length).toBe(2);
+            expect(users[0].id).toBe(1);
+            expect(users[1].id).toBe(2);
+            expect(users[0].gender).toBe('M');
+            expect(users[1].gender).toBe('N/A');
         });
     });
 
