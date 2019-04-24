@@ -116,5 +116,15 @@ describe('USERS MODEL', () => {
             expect(users.length).toBe(1);
             expect(users[0].id).toBe(2);
         });
+
+        it('should return the user that was removed', async () => {
+            await db('users').insert(test_users);
+
+            const user = await Users.deleteUser(1);
+
+            expect(user[0].id).toBe(1);
+            expect(user[0].first_name).toBe('Me');
+            expect(user[0].gender).toBe('M');
+        });
     });
 });
