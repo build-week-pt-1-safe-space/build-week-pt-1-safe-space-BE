@@ -5,7 +5,7 @@ const getAllMes = async () => {
 }
 
 const getUserMes = async id => {
-    return null;
+    return await db('messages').where({ user_id: id });
 }
 
 const addMes = async message => {

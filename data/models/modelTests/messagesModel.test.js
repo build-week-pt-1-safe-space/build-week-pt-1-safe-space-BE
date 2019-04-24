@@ -53,5 +53,12 @@ describe('MESSAGES MODEL', () => {
             expect(userMessages.length).toBe(1);
             expect(userMessages[0].created_at).toBe('4pm');
         });
+
+        it('should return an empty array if no messages found', async () => {
+            const userMessages = await Messages.getUserMes(1);
+
+            expect(Array.isArray(userMessages)).toBe(true);
+            expect(userMessages.length).toBe(0);
+        });
     });
 });
