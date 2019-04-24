@@ -15,7 +15,11 @@ const addMes = async message => {
 }
 
 const editMes = async (id, update) => {
-    return null;
+    if(update.id || update.body || update.send_time) {
+        await db('messages').where({ id }).update(update);
+    }
+
+    return await db('messages').where({ id });
 }
 
 const deleteMes = async id => {

@@ -80,4 +80,29 @@ describe('MESSAGES MODEL', () => {
             expect(user[0].created_at).toBe('4pm');
         });
     });
+
+    describe('editMes()', () => {
+
+        it('should edit message fields that have changed', async () => {
+           await db('messages').insert(test_messages);
+           
+           const update = { body: 'Its allll gooood' }
+           const updatedMessage = await Messages.editMes(1, update);
+
+            expect(updatedMessage[0].body).toBe('Its allll gooood');
+            expect(updatedMessage[0].id).toBe(1);
+            expect(updatedMessage[0].created_at).toBe('4pm');
+        });
+
+        it('should return the message if no changes found', async () => {
+            await db('messages').insert(test_messages);
+           
+            const update = {}
+            const updatedMessage = await Messages.editMes(1, update);
+ 
+             expect(updatedMessage[0].body).toBe('Dont worry, Be Happy');
+             expect(updatedMessage[0].id).toBe(1);
+             expect(updatedMessage[0].created_at).toBe('4pm');
+        });
+    });
 });
