@@ -110,11 +110,25 @@ describe('USERS MODEL', () => {
         it('should return the user', async () => {
             await db('users').insert(test_users);
 
-            const edit = { first_name: 'New' }
+            const edit = { first_name: 'New' };
 
             const user = await Users.editUser(1, edit);
-            console.log(user)
+      
+            expect(user.length).toBe(1);
             expect(user[0].id).toBe(1);
+        });
+
+        it('should return the user with changes made', async () => {
+            await db('users').insert(test_users);
+
+            const edit = { first_name: 'New', phone: 'number' };
+
+            const user = await Users.editUser(2, edit);
+
+            expect(user[0].first_name).toBe('New');
+            expect(user[0].phone).toBe('number');
+            expect(user[0].id).toBe(2);
+            expect(user[0].last_name).toBe('Me');
         });
     });
 
