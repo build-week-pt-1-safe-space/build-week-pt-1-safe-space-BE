@@ -1,0 +1,37 @@
+{
+  "name": "build-week-pt-1-safe-space-BE",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "test": "cross-env DB_CONNECT=testing jest --watch -- verbose"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/build-week-pt-1-safe-space/build-week-pt-1-safe-space-BE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/build-week-pt-1-safe-space/build-week-pt-1-safe-space-BE/issues"
+  },
+  "homepage": "https://github.com/build-week-pt-1-safe-space/build-week-pt-1-safe-space-BE#readme",
+  "dependencies": {
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "knex": "^0.16.5",
+    "sqlite3": "^4.0.6"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "jest": "^24.7.1",
+    "nodemon": "^1.18.11",
+    "supertest": "^4.0.2"
+  }
+}
