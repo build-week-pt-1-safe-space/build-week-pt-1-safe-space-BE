@@ -56,5 +56,20 @@ describe('Users Model', () => {
             expect(users[0].first_name).toBe('Me');
             expect(users[0].id).toBe(1);
         });
+
+        it('should return the added user', async () => {
+            const newUser = await Users.addUser(test_users[1]);
+
+            expect(newUser[0]).toEqual({
+                id: 1,  
+                email: 'alsome@gmail.com', 
+                first_name: 'Also', 
+                last_name: 'Me', 
+                password: 'asDASDasdas', 
+                phone: "15555555555", 
+                profile_pic: 'link', 
+                gender: 'N/A'
+            });
+        });
     });
 });
