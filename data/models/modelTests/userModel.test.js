@@ -57,6 +57,15 @@ describe('USERS MODEL', () => {
         });
     });
 
+    describe('getUserBy()', () => {
+
+        it('should return a single user', async () => {
+            const user = await Users.getUserBy();
+
+            expect(user.length).toBe(1);
+        });
+    });
+
     describe('addUser()', () => {
 
         it('should add user to database', async () => {
