@@ -1,8 +1,8 @@
 const Users = require('../userModel');
 const db = require('../../dbConfig');
 
-beforeEach(() => {
-    return db('users').truncate();
+beforeEach(async () => {
+    return await db('users').truncate();
 });
 
 const test_users = [

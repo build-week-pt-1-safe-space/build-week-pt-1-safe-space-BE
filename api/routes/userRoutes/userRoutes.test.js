@@ -4,8 +4,8 @@ const server = require('../../server');
 const db = require('../../../data/dbConfig');
 const Users = require('../../../data/models/userModel');
 
-beforeEach(() => {
-    return db('users').truncate();
+beforeEach(async () => {
+    return await db('users').truncate();
 });
 
 
@@ -49,7 +49,7 @@ describe('USER ROUTES', () => {
 
     describe('/users/:id', () => {
         
-        describe('GET', () => {
+ 
             it('should return the user that matches the id', async () => {
                 await db('users').insert(test_users);
     
@@ -68,9 +68,6 @@ describe('USER ROUTES', () => {
                 expect(res.status).toBe(400);
                 expect(res.body.message).toBe('No ID Found');
             });
-        });
-
-        describe('PUT', () => {
 
             it('should return the updated user with status 200', async () => {
                 await db('users').insert(test_users);
@@ -80,6 +77,8 @@ describe('USER ROUTES', () => {
                 const res = await request(server).put('/api/users/1')
                                                  .send(update);
 
+                const users = await db('users');
+                                           
                 expect(res.body[0].first_name).toBe('Link');
                 expect(res.body[0].id).toBe(1);
                 expect(res.body[0].last_name).toBe('Me');
@@ -103,6 +102,6 @@ describe('USER ROUTES', () => {
                 expect(res.status).toBe(400);
                 expect(res.body.message).toBe('No ID Found');
             });
-        });
+    
     });
 });

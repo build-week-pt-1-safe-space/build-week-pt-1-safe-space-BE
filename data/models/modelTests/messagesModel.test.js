@@ -1,8 +1,8 @@
 const Messages = require('../messagesModel');
 const db = require('../../dbConfig');
 
-beforeEach(() => {
-    return db('messages').truncate();
+beforeEach(async () => {
+    return await db('messages').truncate();
 });
 
 const test_messages = [
