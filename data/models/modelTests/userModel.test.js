@@ -5,9 +5,32 @@ beforeEach(() => {
     return db('users').truncate();
 });
 
+const test_users = [
+    {  
+        email: 'me@gmail.com', 
+        first_name: 'Me', 
+        last_name: 'Me', 
+        password: 'asDASDasdas', 
+        phone: "15555555555", 
+        profile_pic: 'link', 
+        gender: 'M'
+    },
+
+    {  
+        email: 'alsome@gmail.com', 
+        first_name: 'Also', 
+        last_name: 'Me', 
+        password: 'asDASDasdas', 
+        phone: "15555555555", 
+        profile_pic: 'link', 
+        gender: 'N/A'
+    }
+];
+
 describe('Users Model', () => {
 
     describe('getAllUsers()', () => {
+
         it('should return an array', async () => {
             const users = await Users.getAllUsers();
      
@@ -19,6 +42,19 @@ describe('Users Model', () => {
 
             expect(users).toEqual([]);
             expect(users.length).toBe(0);
+        });
+    });
+
+    describe('addUser()', () => {
+
+        it('should add user to database', async () => {
+            await Users.addUser(test_users[0]);
+
+            const users = await db('users');
+
+            expect(users.length).toBe(1);
+            expet(users[0].first_name).toBe('Me');
+            expect(users[0].id).toBe(1);
         });
     });
 });
