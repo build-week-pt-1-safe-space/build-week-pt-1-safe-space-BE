@@ -4,12 +4,8 @@ const getAllUsers = async () => {
     return db('users');
 }
 
-const getUserBy = async (filter) => {
-    return null;
-}
-
-const getUser = async () => {
-    return null;
+const getUserById = async (filter) => {
+    return await db('users').where({ id: filter });
 }
 
 const addUser = async (user) => {
@@ -23,13 +19,16 @@ const editUser = async (id) => {
 }
 
 const deleteUser = async (id) => {
-    return null;
+    const user = await db('users').where({ id })
+
+    await db('users').where({ id }).del();
+
+    return user;
 }
 
 module.exports = {
     getAllUsers,
-    getUserBy,
-    getUser,
+    getUserById,
     addUser,
     editUser,
     deleteUser

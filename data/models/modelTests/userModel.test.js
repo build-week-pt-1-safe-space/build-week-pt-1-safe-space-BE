@@ -57,12 +57,23 @@ describe('USERS MODEL', () => {
         });
     });
 
-    describe('getUserBy()', () => {
+    describe('getUserById()', () => {
 
         it('should return a single user', async () => {
-            const user = await Users.getUserBy();
+            await db('users').insert(test_users);
+
+            const user = await Users.getUserById(1);
 
             expect(user.length).toBe(1);
+        });
+
+        it('should return user filtered by ID', async () => {
+            await db('users').insert(test_users);
+
+            const user = await Users.getUserById(2);
+
+            expect(user[0].first_name).toBe('Also');
+            expect(user[0].gender).toBe('N/A');
         });
     });
 
@@ -91,6 +102,19 @@ describe('USERS MODEL', () => {
                 profile_pic: 'link', 
                 gender: 'N/A'
             });
+        });
+    });
+
+    describe('deleteUser()', () => {
+
+        it('should remove user from the database by id', async () => {
+            await db('users').insert(test_users);
+            await Users.deleteUser(1);
+
+            const users = await db('users');
+
+            expect(users.length).toBe(1);
+            expect(users[0].id).toBe(2);
         });
     });
 });
