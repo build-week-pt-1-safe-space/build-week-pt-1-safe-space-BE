@@ -105,4 +105,25 @@ describe('MESSAGES MODEL', () => {
              expect(updatedMessage[0].created_at).toBe('4pm');
         });
     });
+
+    describe('deleteMes()', () => {
+
+        it('should delete message from database by id', async () => {
+            await db('messages').insert(test_messages);
+            await Messages.deleteMes(1);
+
+            const messages = await db('messages');
+
+            expect(messages.length).toBe(1);
+            expect(messages[0].id).toBe(2);
+        });
+
+        it('should return the deleted message', async () => {
+            await db('messages').insert(test_messages);
+            const message = await Messages.deleteMes(1);
+
+            expect(message[0].id).toBe(1);
+            expect(message[0].created_at).toBe('4pm');
+        });
+    });
 });

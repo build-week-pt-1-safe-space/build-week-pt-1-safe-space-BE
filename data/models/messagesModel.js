@@ -23,7 +23,14 @@ const editMes = async (id, update) => {
 }
 
 const deleteMes = async id => {
-    return null;
+    if(typeof id === 'number') {
+        const deleted = await db('messages').where({ id });
+
+        await db('messages').where({ id }).del();
+
+        return deleted;
+    } 
+    return { message: 'No ID Provided' };
 }
 
 module.exports = {
