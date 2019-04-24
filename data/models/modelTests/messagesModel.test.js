@@ -41,4 +41,17 @@ describe('MESSAGES MODEL', () => {
             expect(messages[1].user_id).toBe(2);
         });
     });
+
+    describe('getUserMes()', () => {
+
+        it('should return an array of messages that correspond with user_id', async () => {
+            await db('messages').insert(test_messages);
+
+            const userMessages = await Messages.getUserMes(1);
+
+            expect(Array.isArray(userMessages)).toBe(true);
+            expect(userMessages.length).toBe(1);
+            expect(userMessages[0].created_at).toBe('4pm');
+        });
+    });
 });
