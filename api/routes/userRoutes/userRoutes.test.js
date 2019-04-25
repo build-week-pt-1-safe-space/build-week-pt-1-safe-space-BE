@@ -4,10 +4,14 @@ const server = require('../../server');
 const db = require('../../../data/dbConfig');
 const Users = require('../../../data/models/userModel');
 
-beforeEach(async () => {
-    return await db('users').truncate();
-});
+const initialize = async () => {
+    await db('users').truncate();
+    await db('users').insert(test_users);
+}
 
+beforeEach(() => {
+    return initialize();
+});
 
 const test_users = [
     {  
@@ -36,8 +40,6 @@ describe('USER ROUTES', () => {
     describe('/users', () => {
         
         it('should respond with all users in db as a json packet with status 200', async () => {
-            await db('users').insert(test_users);
-
             const res = await request(server).get('/api/users');
 
             expect(res.status).toBe(200);
@@ -52,8 +54,6 @@ describe('USER ROUTES', () => {
         describe('GET', () => {
  
             it('should return the user that matches the id', async () => {
-                await db('users').insert(test_users);
-    
                 const res = await request(server).get('/api/users/1');
     
                 expect(res.status).toBe(200);
@@ -61,9 +61,7 @@ describe('USER ROUTES', () => {
                 expect(res.body[0].first_name).toBe('Me');
             });
     
-            it('should return status 400 and an error message if id absent or NaN', async () => {
-                await db('users').insert(test_users);
-    
+            it('should return status 400 and an error message if id absent or NaN', async () => {    
                 const res = await request(server).get('/api/users/NaN');
     
                 expect(res.status).toBe(400);
@@ -74,14 +72,10 @@ describe('USER ROUTES', () => {
         describe('PUT', () => {
 
             xit('should return the updated user with status 200', async () => {
-                await db('users').insert(test_users);
-
                 const update = { first_name: 'Link' }
 
                 const res = await request(server).put('/api/users/1')
                                                  .send(update);
-
-                const users = await db('users');
                                            
                 expect(res.body[0].first_name).toBe('Link');
                 expect(res.body[0].id).toBe(1);
@@ -90,8 +84,6 @@ describe('USER ROUTES', () => {
 
 
             it('should return status 400 and an error message if id absent or NaN', async () => {
-                await db('users').insert(test_users);
-    
                 const update = {
                     "email": "new@gmail.com",
                     "first_name": "Link",
@@ -112,8 +104,6 @@ describe('USER ROUTES', () => {
         describe('DELETE', () => {
            
             it('should return the deleted user with status 200', async () => {
-                await db('users').insert(test_users);
-
                 const res = await request(server).delete('/api/users/1');
 
                 expect(res.status).toBe(200);

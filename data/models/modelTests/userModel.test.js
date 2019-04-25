@@ -1,8 +1,13 @@
 const Users = require('../userModel');
 const db = require('../../dbConfig');
 
-beforeEach(async () => {
-    return await db('users').truncate();
+const initialize = async () => {
+    await db('users').truncate();
+    await db('users').insert(test_users);
+}
+
+beforeEach(() => {
+    return initialize();
 });
 
 const test_users = [
@@ -27,6 +32,16 @@ const test_users = [
     }
 ];
 
+const addUser =     {  
+    email: 'completelydifferent@gmail.com', 
+    first_name: 'Me', 
+    last_name: 'Me', 
+    password: 'asDASDasdas', 
+    phone: "15555555555", 
+    profile_pic: 'link', 
+    gender: 'M'
+}
+
 describe('USERS MODEL', () => {
 
     describe('getAllUsers()', () => {
@@ -37,16 +52,7 @@ describe('USERS MODEL', () => {
             expect(Array.isArray(users)).toBe(true);
         });
 
-        it('should return an empty array if no users found', async () => {
-            const users = await Users.getAllUsers();
-
-            expect(users).toEqual([]);
-            expect(users.length).toBe(0);
-        });
-
         it('should return all users found in database', async () => {
-            await db('users').insert(test_users);
-
             const users = await Users.getAllUsers();
 
             expect(users.length).toBe(2);
@@ -60,16 +66,12 @@ describe('USERS MODEL', () => {
     describe('getUserById()', () => {
 
         it('should return a single user', async () => {
-            await db('users').insert(test_users);
-
             const user = await Users.getUserById(1);
 
             expect(user.length).toBe(1);
         });
 
         it('should return user filtered by ID', async () => {
-            await db('users').insert(test_users);
-
             const user = await Users.getUserById(2);
 
             expect(user[0].first_name).toBe('Also');
@@ -80,27 +82,27 @@ describe('USERS MODEL', () => {
     describe('addUser()', () => {
 
         it('should add user to database', async () => {
-            await Users.addUser(test_users[0]);
+            await Users.addUser(addUser);
 
             const users = await db('users');
 
-            expect(users.length).toBe(1);
+            expect(users.length).toBe(3);
             expect(users[0].first_name).toBe('Me');
             expect(users[0].id).toBe(1);
         });
 
         it('should return the added user', async () => {
-            const newUser = await Users.addUser(test_users[1]);
+            const newUser = await Users.addUser(addUser);
 
-            expect(newUser[0]).toEqual({
-                id: 1,  
-                email: 'alsome@gmail.com', 
-                first_name: 'Also', 
+            expect(newUser[0]).toEqual({  
+                id: 3,
+                email: 'completelydifferent@gmail.com', 
+                first_name: 'Me', 
                 last_name: 'Me', 
                 password: 'asDASDasdas', 
                 phone: "15555555555", 
                 profile_pic: 'link', 
-                gender: 'N/A'
+                gender: 'M'
             });
         });
     });
@@ -108,8 +110,6 @@ describe('USERS MODEL', () => {
     describe('editUser()', () => {
         
         it('should return the user', async () => {
-            await db('users').insert(test_users);
-
             const edit = { first_name: 'New' };
 
             const user = await Users.editUser(1, edit);
@@ -119,8 +119,6 @@ describe('USERS MODEL', () => {
         });
 
         it('should return the user with changes made', async () => {
-            await db('users').insert(test_users);
-
             const edit = { first_name: 'New', phone: 'number' };
 
             const user = await Users.editUser(2, edit);
@@ -135,7 +133,6 @@ describe('USERS MODEL', () => {
     describe('deleteUser()', () => {
 
         it('should remove user from the database by id', async () => {
-            await db('users').insert(test_users);
             await Users.deleteUser(1);
 
             const users = await db('users');
@@ -145,8 +142,6 @@ describe('USERS MODEL', () => {
         });
 
         it('should return the user that was removed', async () => {
-            await db('users').insert(test_users);
-
             const user = await Users.deleteUser(1);
 
             expect(user[0].id).toBe(1);
