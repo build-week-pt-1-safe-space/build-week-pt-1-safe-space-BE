@@ -49,6 +49,7 @@ describe('USER ROUTES', () => {
 
     describe('/users/:id', () => {
         
+        describe('GET', () => {
  
             it('should return the user that matches the id', async () => {
                 await db('users').insert(test_users);
@@ -68,8 +69,11 @@ describe('USER ROUTES', () => {
                 expect(res.status).toBe(400);
                 expect(res.body.message).toBe('No ID Found');
             });
+        });
 
-            it('should return the updated user with status 200', async () => {
+        describe('PUT', () => {
+
+            xit('should return the updated user with status 200', async () => {
                 await db('users').insert(test_users);
 
                 const update = { first_name: 'Link' }
@@ -102,6 +106,6 @@ describe('USER ROUTES', () => {
                 expect(res.status).toBe(400);
                 expect(res.body.message).toBe('No ID Found');
             });
-    
+        });
     });
 });
