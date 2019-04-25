@@ -79,5 +79,17 @@ describe('MESSAGES ROUTE', () => {
                 expect(res.body[0].id).toBe(2);
             });
         });
+
+        describe('PUT', () => {
+            
+            it('should update an existing message', async () => {
+                const update = { body: 'Howdy Pardner' };
+
+                const res = await request(server).put('/api/messages/1')
+                                                 .send(update);
+
+                expect(res.body[0].body).toBe('Howdy Pardner');                                 
+            });
+        });
     });
 });
