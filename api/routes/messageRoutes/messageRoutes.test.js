@@ -91,5 +91,20 @@ describe('MESSAGES ROUTE', () => {
                 expect(res.body[0].body).toBe('Howdy Pardner');                                 
             });
         });
+
+        describe('DELETE', () => {
+
+            it('should remove user from database and return status 200', async () => {
+                let message;
+                try {
+                    message = await request(server).del('/api/messages/1');
+                } catch(err) {
+                    console.log(err)
+                }
+
+                expect(message.status).toBe(200);
+                expect(message.body.body).toBe('Dont worry, Be Happy');
+            });
+        });
     });
 });

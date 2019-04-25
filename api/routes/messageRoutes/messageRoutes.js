@@ -47,6 +47,19 @@ router.put('/:id', (req, res) => {
             .catch(err => {
                 res.status(500).json(err);
             });
-})
+});
+
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    Messages.deleteMes(id)
+            .then(message => {
+                console.log('mes', message)
+                res.status(200).send(message);
+            })
+            .catch(err => {
+                res.status(500).json(err);
+            });
+});
 
 module.exports = router;
