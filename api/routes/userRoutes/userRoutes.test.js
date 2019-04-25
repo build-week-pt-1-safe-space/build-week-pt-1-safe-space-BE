@@ -118,7 +118,14 @@ describe('USER ROUTES', () => {
 
                 expect(res.status).toBe(200);
                 expect(Array.isArray(res.body)).toBe(true);
-                expect(res.body[0].first_name).toBe('Also');
+                expect(res.body[0].first_name).toBe('Me');
+            });
+
+            it('should return status 400 and an error message if id absent or NaN', async () => {
+                const res = await request(server).delete('/api/users/NaN');
+
+                expect(res.status).toBe(400);
+                expect(res.body.message).toBe('No ID Found');
             });
         });
     });
