@@ -107,5 +107,19 @@ describe('USER ROUTES', () => {
                 expect(res.body.message).toBe('No ID Found');
             });
         });
+
+
+        describe('DELETE', () => {
+           
+            it('should return the deleted user with status 200', async () => {
+                await db('users').insert(test_users);
+
+                const res = await request(server).delete('/api/users/1');
+
+                expect(res.status).toBe(200);
+                expect(Array.isArray(res.body)).toBe(true);
+                expect(res.body[0].first_name).toBe('Also');
+            });
+        });
     });
 });
