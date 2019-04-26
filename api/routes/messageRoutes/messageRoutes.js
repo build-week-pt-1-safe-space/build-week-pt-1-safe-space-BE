@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
                 res.status(500).json(err);
             });
 });
-
+  
 router.post('/', (req, res) => {
     const message = req.body;
   
