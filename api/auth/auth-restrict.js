@@ -3,6 +3,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
+    //Requires JWT to continue route
     const token = req.headers.authorization;
 
     if(token) {
