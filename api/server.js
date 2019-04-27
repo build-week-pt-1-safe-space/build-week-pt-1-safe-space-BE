@@ -3,8 +3,8 @@ const express = require('express');
 const server = express();
 
 //Middleware Import
-// const helmet = require('helmet');
-// const cors = require('cors');
+const helmet = require('helmet');
+const cors = require('cors');
 // const logger = require('morgan');
 
 //Routes Import
@@ -12,8 +12,8 @@ const authRoutes = require('./auth/auth-routes');
 const routes = require('./routes');
 
 //Middleware Use
-// server.use(express.json());
-// server.use(helmet(), cors());
+server.use(express.json());
+server.use(helmet(), cors());
 // server.use(logger('dev'));
 
 //Routes Use
