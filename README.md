@@ -31,13 +31,13 @@ This documentation will cover all of the data models and endpoints which can be 
 
 ## Messages
 
-| Request Type | Endpoint          | Description              |
-|:------------:|:-----------------:|:------------------------:|
-| GET          | /api/messages     | Return All Messages      |
-| POST         | /api/messages     | Create New Message       |
-| GET          | /api/messages/:id | Return Message By ID     |
-| PUT          | /api/messages/:id | Update Message Info By ID|
-| DELETE       | /api/messages/:id | Remove Message By ID     |
+| Request Type | Endpoint          | Description                   |
+|:------------:|:-----------------:|:-----------------------------:|
+| GET          | /api/messages     | Return All Messages           |
+| POST         | /api/messages     | Create New Message            |
+| GET          | /api/messages/:id | Return All Messages By User ID|
+| PUT          | /api/messages/:id | Update Message Info By ID     |
+| DELETE       | /api/messages/:id | Remove Message By ID          |
 
 # Data Models
 
@@ -263,3 +263,16 @@ __NOTE:__ An object only containing the changed field is required, if the field 
     }
 ]
 ```
+
+# Troubleshooting
+
+## Error Codes
+
+| Code | Request | Endpoint      | Message                 | Fix                                      |
+|:----:|:-------:|:-------------:|:-----------------------:|:----------------------------------------:|
+| 409  | POST    | /api/register | Acount Exists For Email | Use New Email                            |
+| 406  | POST    | /api/register | Missing Field           | Ensure Password and email are sent       |
+| 500  | POST    | /api/register | Registration Failed     | Check Server Sent Error for Info         |
+| 401  | POST    | /api/login    | Invalid Credentials     | Email Not Found or Password Did Not Match|
+| 500  | POST    | /api/login    | Could Not Login         | Check Server Sent Error for Info         |
+| 400  | CRUD    | /api/users/:id| No ID Found             | req.params did not contain id field      |
