@@ -270,9 +270,9 @@ __NOTE:__ An object only containing the changed field is required, if the field 
 
 | Code | Request | Endpoint      | Message                 | Fix                                      |
 |:----:|:-------:|:-------------:|:-----------------------:|:----------------------------------------:|
-| 409  | POST    | /api/register | Acount Exists For Email | Use New Email                            |
-| 406  | POST    | /api/register | Missing Field           | Ensure Password and email are sent       |
-| 500  | POST    | /api/register | Registration Failed     | Check Server Sent Error for Info         |
-| 401  | POST    | /api/login    | Invalid Credentials     | Email Not Found or Password Did Not Match|
-| 500  | POST    | /api/login    | Could Not Login         | Check Server Sent Error for Info         |
 | 400  | CRUD    | /api/users/:id| No ID Found             | req.params did not contain id field      |
+| 401  | POST    | /api/login    | Invalid Credentials     | Email Not Found or Password Did Not Match|
+| 406  | POST    | /api/register | Missing Field           | Ensure Password and email are sent       |
+| 409  | POST    | /api/register | Acount Exists For Email | Use New Email                            |
+| 500  | POST    | /api/register | Registration Failed     | Check Server Sent Error for Info         |
+| 500  | POST    | /api/login    | Could Not Login         | Check Server Sent Error for Info         |
