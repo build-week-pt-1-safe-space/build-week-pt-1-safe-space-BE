@@ -181,3 +181,85 @@ __NOTE:__ An object only containing the changed field is required, if the field 
     }
 ]
 ```
+
+## Messages
+
+* A __GET__ request to the `api/messages` endpoint will return an object containing all messages in database as follows:
+
+```javascript
+[
+    {
+        "id": 1,
+        "user_id": 3
+        "body": "Message to be sent via SMS",
+        "created_at": "3pm",
+        "send_time": "6pm"
+    },
+    {
+        "id": 2,
+        "user_id": 2
+        "body": "Message to be sent via SMS",
+        "created_at": "12pm",
+        "send_time": "9pm"
+    }
+]
+```
+* A __POST__ request to the `api/messages` endpoint will expect to recieve an object as follows:
+
+```javascript
+{
+    "user_id": 5
+    "body": "Message to be sent via SMS",
+    "created_at": "3pm",
+    "send_time": "6pm"
+}
+```
+* A __GET__ request to the `api/messages/:id` endpoint will return an object containing all messages to the user specified by id as follows: 
+
+```javascript
+[
+    {
+        "id": 1,
+        "user_id": 5
+        "body": "Message to be sent via SMS",
+        "created_at": "3pm",
+        "send_time": "6pm"
+    },
+    {
+        "id": 2,
+        "user_id": 5
+        "body": "Message to be sent via SMS",
+        "created_at": "12pm",
+        "send_time": "9pm"
+    }
+]
+```
+
+* A __PUT__ request to the `api/messages/:id` will expect to recieve an object as follows:
+
+```javascript
+[
+    {
+        "user_id": 5
+        "body": "New Message to Send",
+        "created_at": "1am",
+        "send_time": "10pm"
+    }
+]
+```
+
+__NOTE:__ An object only containing the changed field is required, if the field is to remain the same it is not needed.
+
+* A __DELETE__ request to the `api/messages/:id` will return an object as follows:
+
+```javascript
+[
+    {
+        "id": 2,
+        "user_id": 5
+        "body": "Message to be sent via SMS",
+        "created_at": "12pm",
+        "send_time": "9pm"
+    }
+]
+```
