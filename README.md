@@ -1,6 +1,6 @@
 # build-week-pt-1-safe-space-BE
 
-#Overview
+# Overview
 
 This API is used as part of the application _Safe Space_ and allows for CRUD operations to
 be performed on both on the application's _users_ and _messages_.
