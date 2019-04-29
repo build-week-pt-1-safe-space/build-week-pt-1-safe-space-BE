@@ -45,7 +45,7 @@ This documentation will cover all of the data models and endpoints which can be 
 
 ### Register
 
-A __POST__ request to the `/api/register` endpoint expects to recieve an object as follows: 
+* A __POST__ request to the `/api/register` endpoint expects to recieve an object as follows: 
 
 ```javascript
 {
@@ -71,7 +71,7 @@ A __POST__ request to the `/api/register` endpoint expects to recieve an object 
 
 ### Login
 
-A __POST__ request to the `api/login` endpoint expects to recieve an object as follows:
+* A __POST__ request to the `api/login` endpoint expects to recieve an object as follows:
 
 ```javascript
 {
@@ -273,6 +273,6 @@ __NOTE:__ An object only containing the changed field is required, if the field 
 | 400  | CRUD    | /api/users/:id| No ID Found             | req.params did not contain id field      |
 | 401  | POST    | /api/login    | Invalid Credentials     | Email Not Found or Password Did Not Match|
 | 406  | POST    | /api/register | Missing Field           | Ensure Password and email are sent       |
-| 409  | POST    | /api/register | Acount Exists For Email | Use New Email                            |
+| 409  | POST    | /api/register | Acount Exists For Email | Use Unique Email Address                 |
 | 500  | POST    | /api/register | Registration Failed     | Check Server Sent Error for Info         |
 | 500  | POST    | /api/login    | Could Not Login         | Check Server Sent Error for Info         |
