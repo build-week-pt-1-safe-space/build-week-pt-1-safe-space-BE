@@ -46,6 +46,10 @@ router.post('/register', async (req, res) => {
             //Register User
             Users.addUser(user)
                 .then(added => {
+                    const token = genToken(added[0]);
+
+                    user.token = token;
+         
                     res.status(201).json({ user });
                 })
                 .catch(error => {
