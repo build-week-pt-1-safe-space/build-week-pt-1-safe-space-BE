@@ -43,7 +43,7 @@ const compareCycle = () => {
             .catch(err => {
                 console.log(err)
             })
-    }, 45000); 
+    }, 50000);
 }
 
 
