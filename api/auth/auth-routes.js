@@ -49,7 +49,8 @@ router.post('/register', async (req, res) => {
                     const token = genToken(added[0]);
 
                     user.token = token;
-         
+                    user.id = added[0].id; 
+
                     res.status(201).json({ user });
                 })
                 .catch(error => {
