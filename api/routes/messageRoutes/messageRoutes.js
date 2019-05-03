@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const moment = require('moment');
 
 const Messages = require('../../../data/models/messagesModel');
 
@@ -16,6 +17,9 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     const message = req.body;
   
+    message.created_at = moment().format('HH:mm');
+    message.send_time = moment().add(2, 'minutes').format('HH:mm');
+
     Messages.addMes(message)
             .then(message => {
                 res.status(200).json(message);

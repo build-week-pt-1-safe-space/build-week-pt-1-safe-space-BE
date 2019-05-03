@@ -8,15 +8,8 @@ const twilioNumber = process.env.NUMBER;
 
 const client = require('twilio')(SID, authToken);
 
-// client.messages
-//         .create({
-//             body: 'Hello World',
-//             to: '+12764691994',
-//             from: '+14233974183'
-//         })
-//         .then(message => console.log(message));
-
 const sendSMS = text => {
+    console.log('enter 2')
     const id = text.user_id;
     
     db.getUserById(id)
@@ -46,4 +39,6 @@ text = {
     user_id: 3
 }
 
-sendSMS(text);
+// sendSMS(text);
+
+module.exports = sendSMS;

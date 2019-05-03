@@ -2,6 +2,12 @@
 const express = require('express');
 const server = express();
 
+//Databas Config
+const db = require('../data/dbConfig');
+
+//SMS Functions
+const timeCheck = require('../twilio/smsTimeCheck');
+
 //Middleware Import
 const helmet = require('helmet');
 const cors = require('cors');
@@ -24,5 +30,23 @@ server.use('/api', routes);
 server.get('/', async (req, res) => {
     res.status(200).json({ api: 'Up and Running' });
 });
+
+const compareCycle = () => {
+    intervalID = setInterval(() => {
+        db.select('*')
+            .from('messages')
+            .then(messages => {
+                    messages.map(message => {
+                    timeCheck(message);
+                });
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, 45000); 
+}
+
+
+compareCycle();
 
 module.exports = server;
