@@ -19,7 +19,7 @@ const getUserByEmail = async(email) => {
 const addUser = async (user) => {
     const [ id ] = await db('users').insert(user);
 
-    return await db('users').where({ id });
+    return await db.select('*').from('users').where({ id });
 }
 
 //Return Updated User From Database
