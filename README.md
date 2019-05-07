@@ -210,8 +210,6 @@ __NOTE:__ An object only containing the changed field is required, if the field 
 {
     "user_id": 5
     "body": "Message to be sent via SMS",
-    "created_at": "3pm",
-    "send_time": "6pm"
 }
 ```
 * A __GET__ request to the `api/messages/:id` endpoint will return an object containing all messages to the user specified by id as follows: 

@@ -4,8 +4,8 @@ const sendSms = require('./smsConfig');
 const db = require('../data/models/userModel');
 
 module.exports = message => {
-    console.log(moment().format('HH:mm'));
-    console.log(message.send_time === moment().format('HH:mm'));
+    // console.log(moment().format('HH:mm'));
+    // console.log(message.send_time === moment().format('HH:mm'));
     // message.send_time === moment().format() ? sendSms(message)
     //                                         : null;
 
